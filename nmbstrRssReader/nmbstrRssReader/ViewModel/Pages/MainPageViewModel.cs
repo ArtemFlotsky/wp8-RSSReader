@@ -11,10 +11,11 @@ namespace nmbstrRssReader.ViewModel.Pages
     {
         public MainPageViewModel()
         {
-            GoToChannel = new DelegateCommand(() =>
+            GoToChannelCommand = new DelegateCommand(() =>
             {
                 NavigationService.Navigate("/View/ChannelPage.xaml", null);
             });
+            AddChannelCommand = new DelegateCommand(() => DataRepository.AddChannel("http://rss.cnn.com/rss/cnn_topstories.rss"));
         }
 
         public async override Task OnNavigated()
@@ -24,7 +25,8 @@ namespace nmbstrRssReader.ViewModel.Pages
             Channels = channels;
         }
 
-        public ICommand GoToChannel { get; set; }
+        public ICommand GoToChannelCommand { get; set; }
+        public ICommand AddChannelCommand { get; set; }
 
         private IEnumerable<Channel> _channels; 
         public IEnumerable<Channel> Channels

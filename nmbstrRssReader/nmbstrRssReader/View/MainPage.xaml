@@ -50,7 +50,8 @@
               Grid.Row="1"
               Margin="12,0,12,0">
             <ListBox ItemTemplate="{StaticResource ChannelListItemTemplate}" 
-                                    ItemsSource="{Binding Channels}"></ListBox>
+                                    ItemsSource="{Binding Channels}" Margin="0 0 0 80"></ListBox>
+            <Button VerticalAlignment="Bottom" Height="80" Content="Add Channel" Command="{Binding AddChannelCommand}"></Button>
         </Grid>
     </Grid>
 

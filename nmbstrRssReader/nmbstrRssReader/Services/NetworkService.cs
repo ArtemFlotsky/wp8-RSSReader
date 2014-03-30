@@ -24,7 +24,8 @@ namespace nmbstrRssReader.Services
             var result = new Channel()
             {
                 Title = feed.Title.Text,
-                ImageUrl = feed.ImageUrl.OriginalString
+                ImageUrl = feed.ImageUrl.OriginalString,
+                Url = url
             };
             return result;
         }

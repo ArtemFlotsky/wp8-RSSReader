@@ -12,9 +12,9 @@ namespace nmbstrRssReader.Repositories.Interfaces
         Task Initialize();
 
         Task<IEnumerable<Channel>> GetChannelsList();
-        bool AddChannel(string address, string name);
-        bool RemoveChannel(string id);
+        Task<bool> AddChannel(string address);
+        Task<bool> RemoveChannel(string id);
 
-        IEnumerable<Item> GetChannelItemsList(string id);
+        Task<IEnumerable<Item>> GetChannelItemsList(string id);
     }
 }

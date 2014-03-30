@@ -15,14 +15,16 @@ namespace nmbstrRssReader.Model
 {
     public class Channel
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKeyAttribute, AutoIncrementAttribute]
         public int Id { get; set; }
 
         public string Title { get; set; }
-
-//        [SQLite.Ignore]
-//        public List<Item> Items { get; set; }
-
+        
         public string ImageUrl { get; set; }
+
+        [Ignore]
+        public List<Item> Items { get; set; } 
+
+        public string Url { get; set; }
     }
 }
