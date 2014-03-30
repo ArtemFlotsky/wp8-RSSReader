@@ -104,3 +104,6 @@ C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader\obj\Debug\nm
 C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader\obj\Debug\View\ChannelPage.g.cs
 C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader\obj\Debug\View\ItemPage.g.cs
 C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader\obj\Debug\View\MainPage.g.cs
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader\obj\Debug\nmbstrRssReader.Resources.AppResources.ru-RU.resources
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader\Bin\Debug\ru-RU\nmbstrRssReader.resources.dll
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader\obj\Debug\ru-RU\nmbstrRssReader.resources.dll

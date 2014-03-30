@@ -8,6 +8,8 @@ using Windows.ApplicationModel.Activation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.Unity;
+using nmbstrRssReader.Repositories;
+using nmbstrRssReader.Repositories.Interfaces;
 using nmbstrRssReader.Resources;
 using nmbstrRssReader.Services;
 using nmbstrRssReader.Services.Interfaces;
@@ -66,6 +68,9 @@ namespace nmbstrRssReader
             IocContainer.RegisterInstance<INavigationService>(new NavigationService(RootFrame));
             IocContainer.RegisterInstance<ICacheService>(new CacheService());
             IocContainer.RegisterInstance<INetworkService>(new NetworkService());
+
+            IocContainer.RegisterInstance<IDataRepository>(new DataRepository(IocContainer.Resolve<INetworkService>(),
+                                                                              IocContainer.Resolve<ICacheService>()));
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -206,8 +211,8 @@ namespace nmbstrRssReader
                 //
                 // If a compiler error is hit then ResourceFlowDirection is missing from
                 // the resource file.
-                FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
-                RootFrame.FlowDirection = flow;
+//                FlowDirection flow = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
+//                RootFrame.FlowDirection = flow;
             }
             catch
             {

@@ -8,6 +8,11 @@
     <AssemblyPart x:Name="Microsoft.Practices.Prism.Interactivity.Phone" Source="Microsoft.Practices.Prism.Interactivity.Phone.dll" />
     <AssemblyPart x:Name="Microsoft.Practices.ServiceLocation" Source="Microsoft.Practices.ServiceLocation.dll" />
     <AssemblyPart x:Name="Microsoft.Practices.Unity.WindowsPhone" Source="Microsoft.Practices.Unity.WindowsPhone.dll" />
+    <AssemblyPart x:Name="nmbstrRssReader.Model" Source="nmbstrRssReader.Model.dll" />
+    <AssemblyPart x:Name="System.Net.Http" Source="System.Net.Http.dll" />
+    <AssemblyPart x:Name="System.Net.Http.Extensions" Source="System.Net.Http.Extensions.dll" />
+    <AssemblyPart x:Name="System.Net.Http.Primitives" Source="System.Net.Http.Primitives.dll" />
+    <AssemblyPart x:Name="System.ServiceModel.Syndication" Source="System.ServiceModel.Syndication.dll" />
     <AssemblyPart x:Name="System.Windows.Interactivity" Source="System.Windows.Interactivity.dll" />
   </Deployment.Parts>
 </Deployment>

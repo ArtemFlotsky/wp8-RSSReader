@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Practices.Unity;
 using nmbstrRssReader.Annotations;
+using nmbstrRssReader.Repositories.Interfaces;
 using nmbstrRssReader.Services.Interfaces;
 
 namespace nmbstrRssReader.Common
@@ -16,9 +17,8 @@ namespace nmbstrRssReader.Common
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected ICacheService _cacheService;
-        protected INetworkService _networkService;
-        protected INavigationService _navigationService;
+        protected IDataRepository DataRepository;
+        protected INavigationService NavigationService;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -33,10 +33,14 @@ namespace nmbstrRssReader.Common
             if (app != null)
             {
                 var container = app.IocContainer;
-                _cacheService = container.Resolve<ICacheService>();
-                _networkService = container.Resolve<INetworkService>();
-                _navigationService = container.Resolve<INavigationService>();
+                DataRepository = container.Resolve<IDataRepository>();
+                NavigationService = container.Resolve<INavigationService>();
             }
+        }
+
+        public virtual async Task OnNavigated()
+        {
+            await DataRepository.Initialize();
         }
     }
 }
