@@ -4,23 +4,25 @@ using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Windows.ApplicationModel.Activation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Microsoft.Practices.Unity;
 using nmbstrRssReader.Resources;
+using nmbstrRssReader.Services;
+using nmbstrRssReader.Services.Interfaces;
+using NavigationService = nmbstrRssReader.Services.Interfaces.NavigationService;
 
 namespace nmbstrRssReader
 {
     public partial class App : Application
     {
-        /// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
-        /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
+        public readonly IUnityContainer IocContainer = new UnityContainer();
+
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        /// <summary>
-        /// Constructor for the Application object.
-        /// </summary>
+
+
         public App()
         {
             // Global handler for uncaught exceptions.
@@ -61,6 +63,9 @@ namespace nmbstrRssReader
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            IocContainer.RegisterInstance<INavigationService>(new NavigationService(RootFrame));
+            IocContainer.RegisterInstance<ICacheService>(new CacheService());
+            IocContainer.RegisterInstance<INetworkService>(new NetworkService());
         }
 
         // Code to execute when the application is activated (brought to foreground)
