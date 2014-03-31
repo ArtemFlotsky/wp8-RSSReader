@@ -16,7 +16,7 @@ namespace nmbstrRssReader.Repositories.Interfaces
 
         Task<bool> AddChannel(string address);
         Task<bool> RemoveChannel(string id);
-        Task<bool> UpdateChannel(string id);
-        Task<IEnumerable<Item>> GetChannelItemsList(string id);
+        Task<Channel> UpdateChannel(Channel channel);
+        Task<List<Item>> GetChannelItemsList(string id);
     }
 }

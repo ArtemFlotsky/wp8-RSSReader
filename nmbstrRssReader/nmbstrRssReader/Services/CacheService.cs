@@ -49,6 +49,7 @@ namespace nmbstrRssReader.Services
                             }
                         }
                     }
+                    
                 }
             }
             catch (Exception)
@@ -58,6 +59,10 @@ namespace nmbstrRssReader.Services
 
             try
             {
+                if (dbFile == null)
+                {
+                    dbFile = await ApplicationData.Current.LocalFolder.GetFileAsync(Constants.DBName);
+                }
                 dbConn = new SQLiteConnection(dbFile.Path);
             }
             catch (Exception)
@@ -76,20 +81,29 @@ namespace nmbstrRssReader.Services
 
         public async Task<List<Channel>> GetChannels()
         {
-            var channels = dbConn.Table<Channel>().ToList();
-            return channels;
+            var result = await Task.Run(() =>
+            {
+                var channels = dbConn.Table<Channel>().ToList();
+                return channels;
+            });
+            return result;
         }
 
         public async Task<bool> AddChannel(Channel channel)
         {
-            dbConn.Insert(channel);
-#if DEBUG
-            foreach (var source in dbConn.Table<Channel>().ToList())
+            var result = await Task.Run(() =>
             {
-                Debug.WriteLine(string.Format("{0} {1} {2} {3}", source.Id, source.Title, source.ImageUrl, source.Url));
-            }
+                dbConn.Insert(channel);
+#if DEBUG
+                foreach (var source in dbConn.Table<Channel>().ToList())
+                {
+                    Debug.WriteLine(string.Format("{0} {1} {2} {3}", source.Id, source.Title, source.ImageUrl,
+                        source.Url));
+                }
 #endif
-            return true;
+                return true;
+            });
+            return result;
         }
 
         public Task<bool> RemoveChannel(Channel channel)
@@ -99,45 +113,56 @@ namespace nmbstrRssReader.Services
 
         public async Task<bool> UpdateChannel(Channel channel)
         {
-            try
+            var result = await Task.Run(() =>
             {
-                var items =
-                dbConn.Query<Channel>(
-                    string.Format(
-                        "update Channel set Title = \"{0}\", ImageUrl = \"{1}\", Description = \"{2}\" where ExternalId = \"{3}\"",
-                        channel.Title,
-                        channel.ImageUrl,
-                        channel.Description,
-                        channel.ExternalId));
-                return true;
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-            
+                try
+                {
+                    var items =
+                        dbConn.Query<Channel>(
+                            string.Format(
+                                "update Channel set Title = \"{0}\", ImageUrl = \"{1}\", Description = \"{2}\" where ExternalId = \"{3}\"",
+                                channel.Title,
+                                channel.ImageUrl,
+                                channel.Description,
+                                channel.ExternalId));
+                    return true;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            });
+            return result;
         }
 
         public async Task<bool> IsChannelExists(string id)
         {
-            try
+            var result = await Task.Run(() =>
             {
-                var items = dbConn.Query<Channel>(string.Format("select * from Channel where ExternalId = \"{0}\"", id));
-                return items.Count != 0;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            
+                try
+                {
+                    var items =
+                        dbConn.Query<Channel>(string.Format("select * from Channel where ExternalId = \"{0}\"", id));
+                    return items.Count != 0;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            });
+            return result;
         }
 
         public async Task<bool> AddItem(Item item)
         {
-            dbConn.Insert(item);
-            Debug.WriteLine(string.Format("{0} {1} {2}", item.Id, item.Title, item.Url));
-            return true;
+            var result = await Task.Run(() =>
+            {
+                dbConn.Insert(item);
+                Debug.WriteLine(string.Format("{0} {1} {2}", item.Id, item.Title, item.Url));
+                return true;
+            });
+            return result;
         }
 
         public Task<bool> RemoveItem(Item item)
@@ -162,17 +187,39 @@ namespace nmbstrRssReader.Services
             return true;
         }
 
+        public async Task<List<Item>> GetItemsByChannelId(string channelId)
+        {
+            var result = await Task.Run(() =>
+            {
+                var items = dbConn.Query<Item>(string.Format("select * from Item where ChannelId = \"{0}\"", channelId));
+                var list = dbConn.Table<Item>().ToList();
+                if (list != null && list.Any())
+                {
+                    foreach (var source in list)
+                    {
+                        Debug.WriteLine("{0} {1} {2} {3}", source.Id, source.Title, source.Url, source.ExternalId);
+                    }
+                }
+                return items.ToList();
+            });
+            return result;
+        }
+
         public async Task<bool> IsItemExists(string id)
         {
-            try
+            var result = await Task.Run(() =>
             {
-                var items = dbConn.Query<Item>(string.Format("select * from Item where ExternalId = \"{0}\"", id));
-                return items.Count != 0;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                try
+                {
+                    var items = dbConn.Query<Item>(string.Format("select * from Item where ExternalId = \"{0}\"", id));
+                    return items.Count != 0;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            });
+            return result;
         }
     }
 }

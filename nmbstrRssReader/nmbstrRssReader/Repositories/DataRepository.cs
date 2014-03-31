@@ -24,7 +24,7 @@ namespace nmbstrRssReader.Repositories
     {
         private readonly INetworkService _networkService;
         private readonly ICacheService _cacheService;
-        
+        private bool _isInited = false;
 
 
         public DataRepository(INetworkService networkService, ICacheService cacheService)
@@ -38,7 +38,11 @@ namespace nmbstrRssReader.Repositories
 
         public async Task Initialize()
         {
-            await _cacheService.Initialize();
+            if (!_isInited)
+            {
+                await _cacheService.Initialize();
+                _isInited = true;
+            }
         }
 
         public async Task<IEnumerable<Channel>> GetChannelsList()
@@ -65,6 +69,10 @@ namespace nmbstrRssReader.Repositories
                         }
                     }
                     await _cacheService.UpdateChannel(newChannel);
+                    
+                }
+                if (newChannel != null)
+                {
                     resultCollection.Add(newChannel);
                 }
 
@@ -74,17 +82,22 @@ namespace nmbstrRssReader.Repositories
 
         public async Task<bool> AddChannel(string address)
         {
-            if (await _cacheService.IsChannelExists(address.CleaupUrl())) return false;
-            var channel = await _networkService.GetChannelByUrlAsync(address);
-            await _cacheService.AddChannel(channel);
-            Debug.WriteLine("Adding items");
-            foreach (var item in channel.Items)
+            await Task.Run(async () =>
             {
-                if (!await _cacheService.IsItemExists(item.ExternalId))
+                if (await _cacheService.IsChannelExists(address.CleaupUrl())) return false;
+                var channel = await _networkService.GetChannelByUrlAsync(address);
+                if (channel == null) return false;
+                await _cacheService.AddChannel(channel);
+                Debug.WriteLine("Adding items");
+                foreach (var item in channel.Items)
                 {
-                    await _cacheService.AddItem(item);                    
+                    if (!await _cacheService.IsItemExists(item.ExternalId))
+                    {
+                        await _cacheService.AddItem(item);
+                    }
                 }
-            }
+                return true;
+            });
             return true;
         }
 
@@ -93,14 +106,31 @@ namespace nmbstrRssReader.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> UpdateChannel(string id)
+        public async Task<Channel> UpdateChannel(Channel channel)
         {
-            throw new NotImplementedException();
+            var result = await Task.Run(async () =>
+            {
+                var newChannel = await _networkService.GetChannelByUrlAsync(channel.Url);
+                if (newChannel != null)
+                {
+                    await _cacheService.RemoveItemsByChannelId(channel.ExternalId);
+                    foreach (var item in newChannel.Items)
+                    {
+                        if (!await _cacheService.IsItemExists(item.ExternalId))
+                        {
+                            await _cacheService.AddItem(item);
+                        }
+                    }
+                    await _cacheService.UpdateChannel(newChannel);
+                }
+                return newChannel;
+            });
+            return result;
         }
 
-        public async Task<IEnumerable<Item>> GetChannelItemsList(string id)
+        public async Task<List<Item>> GetChannelItemsList(string id)
         {
-            throw new NotImplementedException();
+            return await _cacheService.GetItemsByChannelId(id);
         }
     }
 }

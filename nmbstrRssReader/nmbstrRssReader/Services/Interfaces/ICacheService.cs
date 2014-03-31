@@ -19,6 +19,7 @@ namespace nmbstrRssReader.Services.Interfaces
         Task<bool> AddItem(Item item);
         Task<bool> RemoveItem(Item item);
         Task<bool> RemoveItemsByChannelId(string channelId);
+        Task<List<Item>> GetItemsByChannelId(string channelId);
         Task<bool> IsItemExists(string id);
     }
 }

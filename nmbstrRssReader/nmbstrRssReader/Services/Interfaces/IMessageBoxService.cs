@@ -7,12 +7,8 @@ using Microsoft.Phone.Controls;
 
 namespace nmbstrRssReader.Services.Interfaces
 {
-    public interface INavigationService
+    public interface IMessageBoxService<T, TK>
     {
-        void Navigate(string pageToken, object parameter);
-        object GetNavigationData();
-        void GoBack();
-
-        PhoneApplicationFrame Frame { get; set; }
+        Task<TK> ShowAsync(PhoneApplicationFrame rootFrame, params object[] prm);
     }
 }

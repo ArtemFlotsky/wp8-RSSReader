@@ -8,12 +8,14 @@ using Windows.ApplicationModel.Activation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Practices.Unity;
+using nmbstrRssReader.Common;
 using nmbstrRssReader.Repositories;
 using nmbstrRssReader.Repositories.Interfaces;
 using nmbstrRssReader.Resources;
 using nmbstrRssReader.Services;
 using nmbstrRssReader.Services.Interfaces;
-using NavigationService = nmbstrRssReader.Services.Interfaces.NavigationService;
+using nmbstrRssReader.View.Popups;
+using NavigationService = nmbstrRssReader.Services.NavigationService;
 
 namespace nmbstrRssReader
 {
@@ -67,7 +69,8 @@ namespace nmbstrRssReader
         {
             IocContainer.RegisterInstance<INavigationService>(new NavigationService(RootFrame));
             IocContainer.RegisterInstance<ICacheService>(new CacheService());
-            IocContainer.RegisterInstance<INetworkService>(new NetworkService());
+            IocContainer.RegisterInstance<INetworkService>(new NetworkService(RootFrame.Dispatcher));
+            IocContainer.RegisterInstance<IMessageBoxService<AddChannelPopup, AddChannelPopupResult>>(new MessageBoxService<AddChannelPopup, AddChannelPopupResult>());
 
             IocContainer.RegisterInstance<IDataRepository>(new DataRepository(IocContainer.Resolve<INetworkService>(),
                                                                               IocContainer.Resolve<ICacheService>()));

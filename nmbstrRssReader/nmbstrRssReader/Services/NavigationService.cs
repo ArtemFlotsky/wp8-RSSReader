@@ -1,30 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Phone.Controls;
 using nmbstrRssReader.Extensions;
+using nmbstrRssReader.Services.Interfaces;
 
-namespace nmbstrRssReader.Services.Interfaces
+namespace nmbstrRssReader.Services
 {
     public class NavigationService : INavigationService
     {
-        private readonly PhoneApplicationFrame _frame;
 
         public NavigationService(PhoneApplicationFrame frame)
         {
-            _frame = frame;
+            Frame = frame;
         }
 
         public void Navigate(string pageToken, object parameter)
         {
-            _frame.Navigate(new Uri(pageToken, UriKind.RelativeOrAbsolute), parameter);
+            Frame.Navigate(new Uri(pageToken, UriKind.RelativeOrAbsolute), parameter);
+        }
+
+        public object GetNavigationData()
+        {
+            return Frame.GetNavigationData();
         }
 
         public void GoBack()
         {
-            _frame.GoBack();
+            Frame.GoBack();
         }
+
+        public PhoneApplicationFrame Frame { get; set; }
     }
 }

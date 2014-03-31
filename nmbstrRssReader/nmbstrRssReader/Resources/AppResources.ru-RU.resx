@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddChannelHeader" xml:space="preserve">
+    <value>Добавьте ссылку на RSS-канал</value>
+  </data>
   <data name="AppTitle" xml:space="preserve">
     <value>RSS Читалка</value>
+  </data>
+  <data name="GoToNetworkTitle" xml:space="preserve">
+    <value>перейти по ссылке</value>
+  </data>
+  <data name="NetworkIssueMessage" xml:space="preserve">
+    <value>Не удается получить данные. Пожалуйста, попробуйте снова</value>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Случайно</value>
   </data>
   <data name="ResourceLanguage" xml:space="preserve">
     <value>ru-RU</value>

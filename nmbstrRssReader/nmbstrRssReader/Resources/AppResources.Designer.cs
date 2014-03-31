@@ -61,11 +61,47 @@ namespace nmbstrRssReader.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type RSS-channel URL.
+        /// </summary>
+        public static string AddChannelHeader {
+            get {
+                return ResourceManager.GetString("AddChannelHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RSS Reader.
         /// </summary>
         public static string AppTitle {
             get {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to go to page.
+        /// </summary>
+        public static string GoToNetworkTitle {
+            get {
+                return ResourceManager.GetString("GoToNetworkTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are some network problems. Please try again.
+        /// </summary>
+        public static string NetworkIssueMessage {
+            get {
+                return ResourceManager.GetString("NetworkIssueMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Random.
+        /// </summary>
+        public static string Random {
+            get {
+                return ResourceManager.GetString("Random", resourceCulture);
             }
         }
         

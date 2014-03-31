@@ -83,7 +83,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>Bin\ARM\Release</OutputPath>
-    <DefineConstants>TRACE;USE_WP8_NATIVE_SQLITE</DefineConstants>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
@@ -93,8 +93,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\AddChannelPopupResult.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\TextTrimmer.cs" />
     <Compile Include="Extensions\NavigationServiceExtension.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -113,9 +116,12 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\CacheService.cs" />
+    <Compile Include="Services\IMessageBox.cs" />
     <Compile Include="Services\Interfaces\ICacheService.cs" />
+    <Compile Include="Services\Interfaces\IMessageBoxService.cs" />
     <Compile Include="Services\Interfaces\INavigationService.cs" />
     <Compile Include="Services\Interfaces\INetworkService.cs" />
+    <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\NetworkService.cs" />
     <Compile Include="SQLite.cs" />
@@ -133,6 +139,7 @@
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Popups\AddChannelPopup.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -150,6 +157,10 @@
     <Page Include="View\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Popups\AddChannelPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +210,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Community.CsharpSqlite.WinPhone">
       <HintPath>..\..\..\..\..\Users\Artem\Desktop\csharp-sqlite_3_7_7_1_71\Community.CsharpSqlite.WinPhone\Bin\Debug\Community.CsharpSqlite.WinPhone.dll</HintPath>
     </Reference>

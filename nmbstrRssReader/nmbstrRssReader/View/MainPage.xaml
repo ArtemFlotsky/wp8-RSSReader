@@ -2,6 +2,7 @@
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
@@ -16,22 +17,27 @@
                             mc:Ignorable="d">
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="ChannelListItemTemplate">
-            <Grid Height="100"
-                  HorizontalAlignment="Stretch"
-                  Width="480">
+            <Grid Width="480"
+                  Height="100"
+                  HorizontalAlignment="Stretch">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Tap">
+                        <i:InvokeCommandAction Command="{Binding DataContext.GoToChannelCommand, ElementName=ChannelsListBox}" CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <StackPanel Orientation="Horizontal">
-                    <Image Margin="10"
-                           Width="80"
-                           Source="{Binding ImageUrl}"></Image>
+                    <Image Width="80"
+                           Margin="10"
+                           Source="{Binding ImageUrl}" />
                     <StackPanel>
-                        <TextBlock Text="{Binding Title}"
-                                   Foreground="{StaticResource PhoneAccentBrush}"
-                                   TextTrimming="WordEllipsis"></TextBlock>
-                        <TextBlock Text="{Binding Description}"
-                                   MaxWidth="380"
-                                   TextWrapping="Wrap"
+                        <TextBlock Foreground="{StaticResource PhoneAccentBrush}"
+                                   Text="{Binding Title}"
+                                   TextTrimming="WordEllipsis" />
+                        <TextBlock MaxWidth="380"
+                                   MaxHeight="56"
+                                   Text="{Binding Description}"
                                    TextTrimming="WordEllipsis"
-                                   MaxHeight="56"></TextBlock>
+                                   TextWrapping="Wrap" />
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -39,24 +45,20 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--  LayoutRoot is the root grid where all page content is placed  -->
-    <Grid x:Name="LayoutRoot"
-          Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ProgressBar Margin="0 -32 0 0"
-                     IsIndeterminate="{Binding IsInProgress}"
-                     Background="{StaticResource PhoneAccentBrush}"
-                     VerticalAlignment="Top"></ProgressBar>
+        <ProgressBar Margin="0 0 0 0"
+                     VerticalAlignment="Top"
+                     Foreground="{StaticResource PhoneAccentBrush}"
+                     IsIndeterminate="True"
+                     IsEnabled="True"
+                     Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         <!--  TitlePanel contains the name of the application and page title  -->
-        <StackPanel Grid.Row="0"
-                    Margin="12,17,0,28">
-            <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
-                       Text="{Binding LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" />
-            <TextBlock Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}"
-                       Text="main page" />
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" />
 
         </StackPanel>
 
@@ -64,21 +66,22 @@
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,0,12,0">
-            <ListBox ItemTemplate="{StaticResource ChannelListItemTemplate}"
-                     ItemsSource="{Binding Channels}"
-                     Margin="0 0 0 80"></ListBox>
-            <Button VerticalAlignment="Bottom"
-                    Width="235"
+            <ListBox x:Name="ChannelsListBox"
+                     Margin="0 0 0 80"
+                     ItemTemplate="{StaticResource ChannelListItemTemplate}"
+                     ItemsSource="{Binding Channels}" />
+            <Button Width="235"
+                    Height="80"
                     HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Command="{Binding AddChannelCommand}"
+                    Content="Add Channel" />
+            <Button Width="235"
                     Height="80"
-                    Content="Add Channel"
-                    Command="{Binding AddChannelCommand}"></Button>
-            <Button VerticalAlignment="Bottom"
-                    Width="235"
                     HorizontalAlignment="Right"
-                    Height="80"
-                    Content="Update"
-                    Command="{Binding UpdateChannelsCommand}"></Button>
+                    VerticalAlignment="Bottom"
+                    Command="{Binding UpdateChannelsCommand}"
+                    Content="Update" />
         </Grid>
     </Grid>
 
