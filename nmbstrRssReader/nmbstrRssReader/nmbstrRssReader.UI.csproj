@@ -213,8 +213,9 @@
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="Community.CsharpSqlite.WinPhone">
-      <HintPath>..\..\..\..\..\Users\Artem\Desktop\csharp-sqlite_3_7_7_1_71\Community.CsharpSqlite.WinPhone\Bin\Debug\Community.CsharpSqlite.WinPhone.dll</HintPath>
+    <Reference Include="Community.CsharpSqlite.WinPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\Community.CsharpSqlite.WinPhone.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\wp8\Microsoft.Expression.Interactions.dll</HintPath>
@@ -246,8 +247,9 @@
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.18\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="System.ServiceModel.Syndication">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Silverlight\v4.0\Libraries\Client\System.ServiceModel.Syndication.dll</HintPath>
+    <Reference Include="System.ServiceModel.Syndication, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\System.ServiceModel.Syndication.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Interactivity, Version=3.9.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Unofficial.Blend.Interactivity.1.0.0\lib\wp8\System.Windows.Interactivity.dll</HintPath>
