@@ -59,27 +59,27 @@ namespace nmbstrRssReader.ViewModel.Pages
             var channels = await DataRepository.GetChannelsList();
             Channels = channels;
             RemoveProgressKey("nav");
-            if (Channels == null || !Channels.Any())
-            {
-                var success = await DataRepository.AddChannel("http://feeds.nytimes.com/nyt/rss/Technology");
-                if (success)
-                {
-                    channels = await DataRepository.GetChannelsList();
-                    Channels = channels;
-                }
-                success = await DataRepository.AddChannel("http://www.npr.org/rss/rss.php?id=1019");
-                if (success)
-                {
-                    channels = await DataRepository.GetChannelsList();
-                    Channels = channels;
-                }
-                success = await DataRepository.AddChannel("http://feeds.surfnetkids.com/SurfingTheNetWithKids");
-                if (success)
-                {
-                    channels = await DataRepository.GetChannelsList();
-                    Channels = channels;
-                }
-            }
+//            if (Channels == null || !Channels.Any())
+//            {
+//                var success = await DataRepository.AddChannel("http://feeds.nytimes.com/nyt/rss/Technology");
+//                if (success)
+//                {
+//                    channels = await DataRepository.GetChannelsList();
+//                    Channels = channels;
+//                }
+//                success = await DataRepository.AddChannel("http://www.npr.org/rss/rss.php?id=1019");
+//                if (success)
+//                {
+//                    channels = await DataRepository.GetChannelsList();
+//                    Channels = channels;
+//                }
+//                success = await DataRepository.AddChannel("http://feeds.surfnetkids.com/SurfingTheNetWithKids");
+//                if (success)
+//                {
+//                    channels = await DataRepository.GetChannelsList();
+//                    Channels = channels;
+//                }
+//            }
         }
 
         public ICommand GoToChannelCommand { get; set; }
