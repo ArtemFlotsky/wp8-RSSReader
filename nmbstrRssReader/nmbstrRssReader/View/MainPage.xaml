@@ -16,11 +16,22 @@
                             mc:Ignorable="d">
     <phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="ChannelListItemTemplate">
-            <Grid Height="100" HorizontalAlignment="Stretch">
+            <Grid Height="100"
+                  HorizontalAlignment="Stretch"
+                  Width="480">
                 <StackPanel Orientation="Horizontal">
-                    <Image Margin="10" Width="80" Source="{Binding ImageUrl}"></Image>
+                    <Image Margin="10"
+                           Width="80"
+                           Source="{Binding ImageUrl}"></Image>
                     <StackPanel>
-                        <TextBlock Text="{Binding Title}" TextWrapping="Wrap" TextTrimming="WordEllipsis"></TextBlock>
+                        <TextBlock Text="{Binding Title}"
+                                   Foreground="{StaticResource PhoneAccentBrush}"
+                                   TextTrimming="WordEllipsis"></TextBlock>
+                        <TextBlock Text="{Binding Description}"
+                                   MaxWidth="380"
+                                   TextWrapping="Wrap"
+                                   TextTrimming="WordEllipsis"
+                                   MaxHeight="56"></TextBlock>
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -34,7 +45,10 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
+        <ProgressBar Margin="0 -32 0 0"
+                     IsIndeterminate="{Binding IsInProgress}"
+                     Background="{StaticResource PhoneAccentBrush}"
+                     VerticalAlignment="Top"></ProgressBar>
         <!--  TitlePanel contains the name of the application and page title  -->
         <StackPanel Grid.Row="0"
                     Margin="12,17,0,28">
@@ -43,15 +57,28 @@
             <TextBlock Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}"
                        Text="main page" />
+
         </StackPanel>
 
         <!--  ContentPanel - place additional content here  -->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,0,12,0">
-            <ListBox ItemTemplate="{StaticResource ChannelListItemTemplate}" 
-                                    ItemsSource="{Binding Channels}" Margin="0 0 0 80"></ListBox>
-            <Button VerticalAlignment="Bottom" Height="80" Content="Add Channel" Command="{Binding AddChannelCommand}"></Button>
+            <ListBox ItemTemplate="{StaticResource ChannelListItemTemplate}"
+                     ItemsSource="{Binding Channels}"
+                     Margin="0 0 0 80"></ListBox>
+            <Button VerticalAlignment="Bottom"
+                    Width="235"
+                    HorizontalAlignment="Left"
+                    Height="80"
+                    Content="Add Channel"
+                    Command="{Binding AddChannelCommand}"></Button>
+            <Button VerticalAlignment="Bottom"
+                    Width="235"
+                    HorizontalAlignment="Right"
+                    Height="80"
+                    Content="Update"
+                    Command="{Binding UpdateChannelsCommand}"></Button>
         </Grid>
     </Grid>
 

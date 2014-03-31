@@ -68,11 +68,16 @@ namespace nmbstrRssReader.Services
             dbConn.CreateTable<Channel>();
             dbConn.CreateTable<Item>();
             
+#if DEBUG
+            dbConn.DeleteAll<Channel>();
+            dbConn.DeleteAll<Item>();
+#endif
         }
 
         public async Task<List<Channel>> GetChannels()
         {
-            return dbConn.Table<Channel>().ToList();
+            var channels = dbConn.Table<Channel>().ToList();
+            return channels;
         }
 
         public async Task<bool> AddChannel(Channel channel)
@@ -92,15 +97,82 @@ namespace nmbstrRssReader.Services
             throw new NotImplementedException();
         }
 
+        public async Task<bool> UpdateChannel(Channel channel)
+        {
+            try
+            {
+                var items =
+                dbConn.Query<Channel>(
+                    string.Format(
+                        "update Channel set Title = \"{0}\", ImageUrl = \"{1}\", Description = \"{2}\" where ExternalId = \"{3}\"",
+                        channel.Title,
+                        channel.ImageUrl,
+                        channel.Description,
+                        channel.ExternalId));
+                return true;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
+        }
+
+        public async Task<bool> IsChannelExists(string id)
+        {
+            try
+            {
+                var items = dbConn.Query<Channel>(string.Format("select * from Channel where ExternalId = \"{0}\"", id));
+                return items.Count != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
+        }
+
         public async Task<bool> AddItem(Item item)
         {
             dbConn.Insert(item);
+            Debug.WriteLine(string.Format("{0} {1} {2}", item.Id, item.Title, item.Url));
             return true;
         }
 
         public Task<bool> RemoveItem(Item item)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> RemoveItemsByChannelId(string channelId)
+        {
+            dbConn.Query<Item>(string.Format("delete from Item where ChannelId = \"{0}\"", channelId));
+#if DEBUG
+            Debug.WriteLine("Deleted item with ChannelId = {0}", channelId);
+            var list = dbConn.Table<Item>().ToList();
+            if (list != null && list.Any())
+            {
+                foreach (var source in list)
+                {
+                    Debug.WriteLine(string.Format("{0} {1} {2}", source.Id, source.Title, source.Url));
+                }
+            }
+#endif
+            return true;
+        }
+
+        public async Task<bool> IsItemExists(string id)
+        {
+            try
+            {
+                var items = dbConn.Query<Item>(string.Format("select * from Item where ExternalId = \"{0}\"", id));
+                return items.Count != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

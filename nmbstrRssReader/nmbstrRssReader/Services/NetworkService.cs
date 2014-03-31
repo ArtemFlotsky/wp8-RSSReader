@@ -7,6 +7,7 @@ using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using nmbstrRssReader.Extensions;
 using nmbstrRssReader.Model;
 using nmbstrRssReader.Services.Interfaces;
 
@@ -25,8 +26,25 @@ namespace nmbstrRssReader.Services
             {
                 Title = feed.Title.Text,
                 ImageUrl = feed.ImageUrl.OriginalString,
-                Url = url
+                Url = url,
+                Description = feed.Description.Text,
+                Items = new List<Item>(),
+                ExternalId = url.CleaupUrl() //костыль
             };
+           
+            foreach (var item in feed.Items)
+            {
+                var link = item.Links.FirstOrDefault().Uri.AbsolutePath;
+                var cleanedLink = link.CleaupUrl();
+                result.Items.Add(new Item()
+                {
+                    Title = item.Title.Text,
+                    Text = item.Summary.Text,
+                    Url = link,
+                    ExternalId = cleanedLink,
+                    ChannelId = result.ExternalId.CleaupUrl(),
+                });
+            }
             return result;
         }
 

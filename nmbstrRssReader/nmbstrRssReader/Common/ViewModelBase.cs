@@ -17,6 +17,8 @@ namespace nmbstrRssReader.Common
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        internal readonly Dictionary<string, string> _isInProgressKeys = new Dictionary<string, string>();
+
         protected IDataRepository DataRepository;
         protected INavigationService NavigationService;
 
@@ -41,6 +43,37 @@ namespace nmbstrRssReader.Common
         public virtual async Task OnNavigated()
         {
             await DataRepository.Initialize();
+        }
+
+        private bool _isInProgress;
+        public bool IsInProgress
+        {
+            get
+            {
+                return _isInProgress;
+            }
+
+            set
+            {
+                _isInProgress = value;
+                this.OnPropertyChanged("IsInProgress");
+            }
+        }
+
+        protected void AddProgressKey(string key)
+        {
+            this._isInProgressKeys[key] = key;
+            this.IsInProgress = true;
+
+        }
+
+        protected void RemoveProgressKey(string key)
+        {
+            this._isInProgressKeys.Remove(key);
+            if (this._isInProgressKeys.Keys.Count == 0)
+            {
+                this.IsInProgress = false;
+            }
         }
     }
 }

@@ -18,9 +18,13 @@ namespace nmbstrRssReader.Model
         [PrimaryKeyAttribute, AutoIncrementAttribute]
         public int Id { get; set; }
 
+        public string ExternalId { get; set; }
+
         public string Title { get; set; }
         
         public string ImageUrl { get; set; }
+
+        public string Description { get; set; }
 
         [Ignore]
         public List<Item> Items { get; set; } 

@@ -96,6 +96,7 @@
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\NavigationServiceExtension.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
