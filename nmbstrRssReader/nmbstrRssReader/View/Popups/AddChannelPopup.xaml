@@ -4,11 +4,10 @@
              xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
              Margin="0">
     <Grid x:Name="MessagePanel"
-          
           HorizontalAlignment="Stretch"
           VerticalAlignment="Stretch">
         <Grid.Background>
-            <SolidColorBrush Color="{StaticResource PhoneContrastForegroundColor}" Opacity="0.5"></SolidColorBrush>
+            <SolidColorBrush Opacity="0.5" Color="{StaticResource PhoneContrastForegroundColor}" />
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -43,7 +42,7 @@
                             Grid.Column="1"
                             Click="NoButton_OnClick"
                             Content="{Binding LocalizedResources.Random,
-                                          Source={StaticResource LocalizedStrings}}"
+                                              Source={StaticResource LocalizedStrings}}"
                             toolkit:TiltEffect.IsTiltEnabled="True" />
                 </Grid>
             </StackPanel>

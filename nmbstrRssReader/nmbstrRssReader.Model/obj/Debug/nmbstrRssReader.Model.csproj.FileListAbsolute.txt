@@ -1,0 +1,4 @@
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\Bin\Debug\nmbstrRssReader.Model.dll
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\Bin\Debug\nmbstrRssReader.Model.pdb
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\obj\Debug\nmbstrRssReader.Model.dll
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\obj\Debug\nmbstrRssReader.Model.pdb

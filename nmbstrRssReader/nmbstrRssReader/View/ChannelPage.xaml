@@ -32,7 +32,8 @@
                                    TextTrimming="WordEllipsis" />
                         <TextBlock MaxWidth="480"
                                    MaxHeight="56"
-                                   Text="{Binding Text, Converter={StaticResource TextTrimmer}}"
+                                   Text="{Binding Text,
+                                                  Converter={StaticResource TextTrimmer}}"
                                    TextTrimming="WordEllipsis"
                                    TextWrapping="Wrap" />
                     </StackPanel>
@@ -50,8 +51,9 @@
                      VerticalAlignment="Top"
                      Foreground="{StaticResource PhoneAccentBrush}"
                      IsEnabled="True"
-                     Visibility="{Binding IsInProgress, Converter={StaticResource BooleanToVisibilityConverter}}"
-                     IsIndeterminate="True"/>
+                     IsIndeterminate="True"
+                     Visibility="{Binding IsInProgress,
+                                          Converter={StaticResource BooleanToVisibilityConverter}}" />
         <!--  TitlePanel contains the name of the application and page title  -->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="{Binding LocalizedResources.AppTitle, Source={StaticResource LocalizedStrings}}" />

@@ -1,0 +1,7 @@
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\Bin\ARM\Debug\nmbstrRssReader.Model.dll
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\Bin\ARM\Debug\nmbstrRssReader.Model.pdb
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\obj\ARM\Debug\nmbstrRssReader.Model.dll
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\obj\ARM\Debug\nmbstrRssReader.Model.pdb
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\Bin\ARM\Debug\Community.CsharpSqlite.WinPhone.dll
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\Bin\ARM\Debug\Community.CsharpSqlite.WinPhone.pdb
+C:\Projects\RRSReader\wp8-RSSReader\nmbstrRssReader\nmbstrRssReader.Model\obj\ARM\Debug\nmbstrRssReader.Model.csprojResolveAssemblyReference.cache
