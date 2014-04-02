@@ -96,7 +96,7 @@
   <ItemGroup>
     <Reference Include="Community.CsharpSqlite.WinPhone, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\libs\Community.CsharpSqlite.WinPhone.dll</HintPath>
+      <HintPath>..\..\libs\Community.CsharpSqlite.WinPhone.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
